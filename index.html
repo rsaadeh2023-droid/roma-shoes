@@ -188,6 +188,10 @@
       background: linear-gradient(135deg, #4285f4 0%, #34a853 40%, #fbbc05 70%, #ea4335 100%);
     }
 
+    .bg-website {
+      background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    }
+
     /* Branches Grid */
     .branches-grid {
       display: grid;
@@ -311,6 +315,24 @@
       font-weight: 500;
     }
 
+    .direction-btn {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 1rem;
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+    }
+
+    .direction-btn:hover {
+      background-color: var(--highlight);
+    }
+
     /* Map Section */
     .map-wrapper {
       margin-top: 2rem;
@@ -373,6 +395,21 @@
 
     <!-- Social Media Grid -->
     <div class="social-grid">
+
+      <a href="https://roma-shoes.com/" class="social-card" target="_blank">
+        <div class="social-icon bg-website">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z" />
+            <path d="M2 12h20" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+        </div>
+        <div class="social-content">
+          <div class="label">Visit our</div>
+          <div class="value">Website</div>
+        </div>
+      </a>
+
       <a href="https://www.facebook.com/Romashoeslb/" class="social-card" target="_blank">
         <div class="social-icon bg-facebook">
           <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -457,6 +494,11 @@
               <span class="service-tag">Delivery</span>
             </div>
           </div>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=34.420877,35.84364" target="_blank"
+            class="direction-btn">
+            Get Directions 📍
+          </a>
         </div>
       </div>
 
@@ -482,10 +524,15 @@
             <div class="section-label">Services</div>
             <div class="services-tags">
               <span class="service-tag">Outlet Prices</span>
-              <span class="service-tag">In-store Pick-up</span>
+              <span class="service-tag">Pick-up</span>
               <span class="service-tag">Delivery</span>
             </div>
           </div>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=34.4210005,35.8435283" target="_blank"
+            class="direction-btn">
+            Get Directions 📍
+          </a>
         </div>
       </div>
 
@@ -516,6 +563,11 @@
               <span class="service-tag">Delivery</span>
             </div>
           </div>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=34.436928, 35.842610" target="_blank"
+            class="direction-btn">
+            Get Directions 📍
+          </a>
         </div>
       </div>
 
@@ -541,10 +593,15 @@
             <div class="section-label">Services</div>
             <div class="services-tags">
               <span class="service-tag">In-store Shopping</span>
-              <span class="service-tag">Quick Pick-up</span>
+              <span class="service-tag">Pick-up</span>
               <span class="service-tag">Delivery</span>
             </div>
           </div>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=34.440141,35.835792" target="_blank"
+            class="direction-btn">
+            Get Directions 📍
+          </a>
         </div>
       </div>
 
@@ -573,6 +630,11 @@
               <span class="service-tag">Delivery</span>
             </div>
           </div>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=34.4501842, 35.8122036" target="_blank"
+            class="direction-btn">
+            Get Directions 📍
+          </a>
         </div>
       </div>
 
@@ -612,7 +674,7 @@
       {
         name: "Roma-Shoes <br /> Sarai Al Atiqa",
         phone: "81 165 130",
-        coords: [34.4369485, 35.833087],
+        coords: [34.436928, 35.842610],
       },
       {
         name: "Roma-Shoes <br /> Abi Samra Outlet",
