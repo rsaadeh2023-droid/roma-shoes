@@ -1,571 +1,648 @@
-<!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-  <rect width="15" height="10.556" x=".5" y=".5" stroke="#fff" rx="1.5" />
-  <path stroke="#fff" d="M4.055 0v10.667" />
-</svg> -->
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Roma Shoes</title>
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roma Shoes - Premium Footwear</title>
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;800&display=swap"
+    rel="stylesheet" />
 
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: "Poppins", sans-serif;
-        /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
-        color: #333;
-        margin: 0 auto;
-        padding: 0;
-        max-width: 500px;
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --highlight: #0f3460;
+      --bg-light: #f8f9fc;
+      --white: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-gray: #666666;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header / Hero */
+    .hero {
+      background: var(--white);
+      padding: 2rem 0;
+      text-align: center;
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #1a1a2e, #e94560, #1a1a2e);
+    }
+
+    .logo-container img {
+      height: 140px;
+      width: auto;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: "Outfit", sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-family: "Outfit", sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      margin: 4rem 0 2rem;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 0.5rem auto 0;
+    }
+
+    /* Social Links Grid */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .social-card {
+      display: flex;
+      align-items: center;
+      padding: 1.25rem;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .social-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .social-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      color: white;
+    }
+
+    .social-content .label {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      font-weight: 500;
+    }
+
+    .social-content .value {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    /* Brand Colors for Icons */
+    .bg-facebook {
+      background-color: #1877f2;
+    }
+
+    .bg-tiktok {
+      background-color: #000000;
+    }
+
+    .bg-instagram {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+    }
+
+    .bg-maps {
+      background: linear-gradient(135deg, #4285f4 0%, #34a853 40%, #fbbc05 70%, #ea4335 100%);
+    }
+
+    /* Branches Grid */
+    .branches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .branch-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .branch-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .branch-image {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .branch-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .branch-card:hover .branch-image img {
+      transform: scale(1.05);
+    }
+
+    .delivery-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(15, 195, 48, 0.95);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .branch-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .branch-title {
+      font-family: "Outfit", sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .branch-phone {
+      display: inline-block;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .info-row {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-gray);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .hours-list {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+    }
+
+    .services-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .service-tag {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+      background: #f0f2f5;
+      border-radius: 6px;
+      color: #555;
+      font-weight: 500;
+    }
+
+    /* Map Section */
+    .map-wrapper {
+      margin-top: 2rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 4px solid var(--white);
+      height: 500px;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 6rem;
+    }
+
+    footer p {
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
       }
 
       .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem;
-      }
-      .head-title {
-        color: #000;
-        font-family: cursive;
-        letter-spacing: 5px;
-        text-align: center;
-        margin-top: 10px;
-        font-weight: bold;
-      }
-      header {
-        text-align: center;
-        padding: 2rem 0;
-      }
-      header h1 {
-        font-size: 2.5rem;
-        color: #1a73e8;
-        font-family: cursive;
-        letter-spacing: 5px;
-      }
-      header p {
-        font-size: 1.2rem;
-        color: #555;
-        margin-top: 0.5rem;
+        padding: 0 1rem;
       }
 
-      /* Social Media Section */
+      .branches-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
 
-      .social-media-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .social-links {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        font-family: "Inter", sans-serif;
-      }
+<body>
 
-      .social-link {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        border-radius: 20px;
-        background: white;
-        text-decoration: none;
-        color: #333;
-        font-weight: 600;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .social-link:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      }
-
-      .social-link .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        margin-right: 1rem;
-        border: 2px solid;
-        border-radius: 20px;
-      }
-
-      .social-link .icon svg {
-        width: 100%;
-        height: 100%;
-        fill: currentColor;
-      }
-
-      .linkedin {
-        color: #0a66c2;
-      }
-      .facebook {
-        color: #fff;
-      }
-      .tiktok {
-        color: #fff;
-      }
-      .instagram {
-        color: #fff;
-      }
-      .maps {
-        color: #fff;
-      }
-
-      .facebook {
-        background: #1877f2;
-      }
-      .facebook:hover {
-        transform: scale(1.2);
-        box-shadow: 0 8px 20px rgba(24, 119, 242, 0.5);
-      }
-      .facebook svg {
-        fill: white;
-      }
-
-      .tiktok {
-        background: #000000;
-      }
-      .tiktok:hover {
-        transform: scale(1.2);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      }
-      .tiktok svg {
-        fill: #fff;
-      }
-
-      .instagram {
-        background: radial-gradient(
-          circle at 30% 107%,
-          #fdf497 0%,
-          #fd5949 45%,
-          #d6249f 60%,
-          #285aeb 90%
-        );
-      }
-      .instagram:hover {
-        transform: scale(1.2);
-        box-shadow: 0 8px 20px rgba(255, 0, 128, 0.5);
-      }
-      .instagram svg {
-        fill: white;
-      }
-
-      .maps {
-        background: linear-gradient(
-          135deg,
-          #4285f4 0%,
-          #34a853 40%,
-          #fbbc05 70%,
-          #ea4335 100%
-        );
-      }
-
-      .maps:hover {
-        transform: scale(1.2);
-        box-shadow: 0 8px 20px rgba(33, 147, 176, 0.5);
-      }
-
-      .maps svg {
-        fill: white;
-      }
-
-      .linkedin {
-        background: #0077b5;
-      }
-      .linkedin:hover {
-        transform: scale(1.2);
-        box-shadow: 0 8px 20px rgba(0, 119, 181, 0.5);
-      }
-      .linkedin svg {
-        fill: white;
-      }
-
-      /* Branch Section */
-
-      span.delivery {
-        background-color: #0fc330;
-        color: #fff;
-        border-radius: 20px;
-        font-size: 12px;
-        padding: 5px;
-      }
-      .branches {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 1.5rem;
-      }
-      .branch-card {
-        padding: 1.5rem;
-        border-radius: 12px;
-        /* color: white; */
-        border: 2px solid #2a5298;
-        transition: all 0.3s ease;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      }
-      .branch-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      }
-
-      .branch-card img {
-        width: 100%;
-        height: auto;
-        border-radius: 12px;
-        object-fit: cover;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        margin-bottom: 10px;
-      }
-
-      .branch-card h3 {
-        margin-bottom: 0.5rem;
-      }
-      .branch-card p {
-        margin-bottom: 1rem;
-      }
-
-      .branch-info {
-        margin-top: 0.5rem;
-      }
-      .working-days {
-        margin-bottom: 0.8rem;
-        line-height: 24px;
-      }
-      .working-days span {
-        display: block;
-        margin-bottom: 2px;
-        line-height: 24px;
-      }
-
-      .business-types {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-      .business-types span {
-        padding: 0.3rem 0.6rem;
-        border-radius: 6px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        background: rgba(255, 255, 255, 0.2);
-        border: 2px solid #ccc;
-      }
-
-      .call-button {
-        display: inline-block;
-        margin-top: 0.5rem;
-        padding: 0.5rem 1rem;
-        background-color: rgba(255, 255, 255, 0.3);
-        color: white;
-        font-weight: 600;
-        border-radius: 6px;
-        transition: 0.3s;
-      }
-      .call-button:hover {
-        background-color: rgba(255, 255, 255, 0.6);
-      }
-
-      /* Leaflet Map */
-      #map {
-        height: 400px;
-        width: 100%;
-        margin-top: 3rem;
-        border-radius: 12px;
-      }
-
-      footer {
-        text-align: center;
-        margin-top: 4rem;
-        padding: 2rem 0;
-        color: #777;
-      }
-      .img-logo {
-        width: 100%;
-        background-color: #fff;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="img-logo">
-      <img src="roma-shoes.png" />
-    </div>
+  <header class="hero">
     <div class="container">
-      <div class="social-links">
-        <a
-          href="https://www.facebook.com/Romashoeslb/"
-          class="social-link facebook"
-        >
-          <span class="icon">
-            <svg
-              viewBox="0 0 24 24"
-              width="28"
-              height="28"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.5 8.5V6.8c0-.7.5-1.3 1.2-1.3h1.8V3h-2.3C11.8 3 10 4.8 10 7v1.5H8v3h2v9h3.5v-9h2.3l.4-3h-2.7z"
-                fill="white"
-              />
-            </svg>
-          </span>
-          <span class="text">URL to Facebook</span>
-        </a>
-
-        <a
-          href="https://www.tiktok.com/@romashoes_tripoli"
-          class="social-link tiktok"
-        >
-          <span class="icon">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M12 2c.5 0 1 .1 1.4.3a5.2 5.2 0 0 0 3.7 1.4V7a8.1 8.1 0 0 1-3.7-1V14a5 5 0 1 1-5-5c.2 0 .5 0 .7.1V12.6a2.5 2.5 0 1 0 1.8 2.4V2z"
-              />
-            </svg>
-          </span>
-          <span class="text">URL to Tiktok</span>
-        </a>
-
-        <a
-          href="https://www.instagram.com/romashoes_tripoli/?hl=en"
-          class="social-link instagram"
-        >
-          <span class="icon">
-            <svg
-              viewBox="0 0 24 24"
-              width="28"
-              height="28"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zM12 8.5A3.5 3.5 0 1 1 8.5 12 3.504 3.504 0 0 1 12 8.5zm0 9.5a6 6 0 1 1 6-6 6.007 6.007 0 0 1-6 6zm5.25-10.75a1.25 1.25 0 1 1 1.25-1.25 1.251 1.251 0 0 1-1.25 1.25z"
-                fill="white"
-              />
-            </svg>
-          </span>
-          <span class="text">URL to Instagram</span>
-        </a>
-        <a
-          href="https://www.google.com/maps/search/?api=1&query=Roma+Shoes"
-          class="social-link maps"
-        >
-          <span class="icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M12 2C8.686 2 6 4.686 6 8c0 4.418 6 14 6 14s6-9.582 6-14c0-3.314-2.686-6-6-6zm0 8.5A2.5 2.5 0 1 1 14.5 8 2.5 2.5 0 0 1 12 10.5z"
-              />
-            </svg>
-          </span>
-          <span class="text">URL to Goole Mpas</span>
-        </a>
+      <div class="logo-container">
+        <img src="roma-shoes.png" alt="Roma Shoes Logo" />
       </div>
+      <h1>Roma Shoes</h1>
+      <p>Take You Good places</p>
+    </div>
+  </header>
 
-      <!-- Branches -->
-      <div class="branches">
-        <h3 class="head-title" style="text-align: center">Our Branches</h3>
-        <!-- Branch 1 -->
+  <div class="container">
 
-        <div class="branch-card branch-2">
-          <img src="abi-samra.jpg" alt="Roma Shoes - Azmi beik branch" />
-          <h3>Abi Samra · 81 165 130</h3>
-          <span class="delivery">Delivery all over Lebanon</span>
-
-          <!-- <p>
-            Modern facilities and expert staff make this branch the perfect
-            choice for convenience and quality.
-          </p> -->
-          <div class="branch-info">
-            <!-- <div class="delivery">
-              <strong>Delivery: Whole Lebanon</strong>
-            </div> -->
-            <div class="working-days">
-              <strong>Working Hours:</strong>
-              <span>Mon-Sat: 10:00 - 20:00</span>
-              <span>Sun: 10:30 - 16:00</span>
-            </div>
-            <div class="business-types">
-              <span>In-store Shopping</span>
-              <span>In-store Pick-up</span>
-              <span>Delivery</span>
-            </div>
-            <!-- <a href="tel:+81165130" class="call-button">Call Now 📞</a> -->
-          </div>
+    <!-- Social Media Grid -->
+    <div class="social-grid">
+      <a href="https://www.facebook.com/Romashoeslb/" class="social-card" target="_blank">
+        <div class="social-icon bg-facebook">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M13.5 8.5V6.8c0-.7.5-1.3 1.2-1.3h1.8V3h-2.3C11.8 3 10 4.8 10 7v1.5H8v3h2v9h3.5v-9h2.3l.4-3h-2.7z" />
+          </svg>
         </div>
-
-        <!-- Branch 2 -->
-        <div class="branch-card branch-2">
-          <img
-            src="abi-samra-outlet.webp"
-            alt="Roma Shoes - Azmi beik branch"
-          />
-          <h3>Abi Samra - Outlet · 81 165 130</h3>
-          <span class="delivery">Delivery all over Lebanon</span>
-          <!-- <p>
-            Modern facilities and expert staff make this branch the perfect
-            choice for convenience and quality.
-          </p> -->
-          <div class="branch-info">
-            <div class="working-days">
-              <strong>Working Hours:</strong>
-              <span>Mon-Sat: 10:00 - 20:00</span>
-              <span>Sun: 10:30 - 16:00</span>
-            </div>
-            <div class="business-types">
-              <span>In-store Shopping</span>
-              <span>In-store Pick-up</span>
-              <span>Delivery</span>
-            </div>
-            <!-- <a href="tel:+81165130" class="call-button">Call Now 📞</a> -->
-          </div>
+        <div class="social-content">
+          <div class="label">Follow us on</div>
+          <div class="value">Facebook</div>
         </div>
+      </a>
 
-        <div class="branch-card branch-1">
-          <img src="sarai.jpg" alt="Roma Shoes - Sarai Al Atiqa branch" />
-          <h3>Sarai Al Atiqa · 81 165 130</h3>
-          <span class="delivery">Delivery all over Lebanon</span>
-          <!-- <p>
-            Located in the historic district, offering a full range of shoes and
-            personalized service.
-          </p> -->
-          <div class="branch-info">
-            <div class="working-days">
-              <strong>Working Hours:</strong>
-              <span>Mon-Thur: 09:00 - 17:30</span>
-              <span>Frid: 09:00 - 17:00</span>
-              <span>Sat: 09:00 - 17:30</span>
-              <span>Sun: 09:30 - 15:30</span>
-            </div>
-            <div class="business-types">
-              <span>In-store Shopping</span>
-              <span>In-store Pick-up</span>
-              <span>Delivery</span>
-            </div>
-            <!-- <a href="tel:+81165130" class="call-button">Call Now 📞</a> -->
-          </div>
+      <a href="https://www.tiktok.com/@romashoes_tripoli" class="social-card" target="_blank">
+        <div class="social-icon bg-tiktok">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 2c.5 0 1 .1 1.4.3a5.2 5.2 0 0 0 3.7 1.4V7a8.1 8.1 0 0 1-3.7-1V14a5 5 0 1 1-5-5c.2 0 .5 0 .7.1V12.6a2.5 2.5 0 1 0 1.8 2.4V2z" />
+          </svg>
         </div>
-
-        <div class="branch-card branch-2">
-          <img src="azmi.jpg" alt="Roma Shoes - Azmi beik branch" />
-          <h3>Azmi Beik · 81 165 130</h3>
-          <span class="delivery">Delivery all over Lebanon</span>
-          <!-- <p>
-            Modern facilities and expert staff make this branch the perfect
-            choice for convenience and quality.
-          </p> -->
-          <div class="branch-info">
-            <div class="working-days">
-              <strong>Working Hours:</strong>
-              <span>Mon-Sat: 9:30 - 18:00</span>
-              <span>Sun: 10:00 - 15:00</span>
-            </div>
-            <div class="business-types">
-              <span>In-store Shopping</span>
-              <span>In-store Pick-up</span>
-              <span>Delivery</span>
-            </div>
-            <!-- <a href="tel:+81165130" class="call-button">Call Now 📞</a> -->
-          </div>
+        <div class="social-content">
+          <div class="label">Watch on</div>
+          <div class="value">TikTok</div>
         </div>
+      </a>
 
-        <!-- Branch 3 -->
-        <div class="branch-card branch-3">
-          <img src="mina.jpg" alt="Roma Shoes - Al Mina branch" />
-          <h3>Rachid Karami · 81 165 130</h3>
-          <span class="delivery">Delivery all over Lebanon</span>
-          <!-- <p>
-            Enjoy our convenient location with a relaxing ambiance and excellent
-            customer service.
-          </p> -->
-          <div class="branch-info">
-            <div class="working-days">
-              <strong>Working Hours:</strong>
-              <span>Mon-Sun: 10:00 - 21:00</span>
+      <a href="https://www.instagram.com/romashoes_tripoli/?hl=en" class="social-card" target="_blank">
+        <div class="social-icon bg-instagram">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zM12 8.5A3.5 3.5 0 1 1 8.5 12 3.504 3.504 0 0 1 12 8.5zm0 9.5a6 6 0 1 1 6-6 6.007 6.007 0 0 1-6 6zm5.25-10.75a1.25 1.25 0 1 1 1.25-1.25 1.251 1.251 0 0 1-1.25 1.25z" />
+          </svg>
+        </div>
+        <div class="social-content">
+          <div class="label">Follow us on</div>
+          <div class="value">Instagram</div>
+        </div>
+      </a>
+
+      <a href="https://www.google.com/maps/search/?api=1&query=Roma+Shoes" class="social-card" target="_blank">
+        <div class="social-icon bg-maps">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 2C8.686 2 6 4.686 6 8c0 4.418 6 14 6 14s6-9.582 6-14c0-3.314-2.686-6-6-6zm0 8.5A2.5 2.5 0 1 1 14.5 8 2.5 2.5 0 0 1 12 10.5z" />
+          </svg>
+        </div>
+        <div class="social-content">
+          <div class="label">Find us on</div>
+          <div class="value">Google Maps</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Branches Section -->
+    <h2 class="section-title">Our Branches</h2>
+
+    <div class="branches-grid">
+
+      <!-- Branch 1: Abi Samra -->
+      <div class="branch-card">
+        <div class="branch-image">
+          <img src="abi-samra.jpg" alt="Abi Samra Branch" loading="lazy">
+          <div class="delivery-badge">Delivery Available</div>
+        </div>
+        <div class="branch-content">
+          <h3 class="branch-title">Abi Samra</h3>
+          <span class="branch-phone">📞 81 165 130</span>
+
+          <div class="info-row">
+            <div class="section-label">Opening Hours</div>
+            <div class="hours-list">
+              <div class="hours-row"><span>Mon-Sat</span> <span>10:00 - 20:00</span></div>
+              <div class="hours-row"><span>Sunday</span> <span>10:30 - 16:00</span></div>
             </div>
-            <div class="business-types">
-              <span>In-store Shopping</span>
-              <span>In-store Pick-up</span>
-              <span>Delivery</span>
+          </div>
+
+          <div class="info-row">
+            <div class="section-label">Services</div>
+            <div class="services-tags">
+              <span class="service-tag">In-store Shopping</span>
+              <span class="service-tag">Pick-up</span>
+              <span class="service-tag">Delivery</span>
             </div>
-            <!-- <a href="tel:+81165130" class="call-button">Call Now 📞</a> -->
           </div>
         </div>
       </div>
 
-      <!-- Map Section -->
-      <h3 class="head-title">Branches on Map</h3>
+      <!-- Branch 2: Abi Samra Outlet -->
+      <div class="branch-card">
+        <div class="branch-image">
+          <img src="abi-samra-outlet.webp" alt="Abi Samra Outlet" loading="lazy">
+          <div class="delivery-badge">Delivery Available</div>
+        </div>
+        <div class="branch-content">
+          <h3 class="branch-title">Abi Samra Outlet</h3>
+          <span class="branch-phone">📞 81 165 130</span>
+
+          <div class="info-row">
+            <div class="section-label">Opening Hours</div>
+            <div class="hours-list">
+              <div class="hours-row"><span>Mon-Sat</span> <span>10:00 - 20:00</span></div>
+              <div class="hours-row"><span>Sunday</span> <span>10:30 - 16:00</span></div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="section-label">Services</div>
+            <div class="services-tags">
+              <span class="service-tag">Outlet Prices</span>
+              <span class="service-tag">In-store Pick-up</span>
+              <span class="service-tag">Delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 3: Sarai Al Atiqa -->
+      <div class="branch-card">
+        <div class="branch-image">
+          <img src="sarai.jpg" alt="Sarai Al Atiqa Branch" loading="lazy">
+          <div class="delivery-badge">Delivery Available</div>
+        </div>
+        <div class="branch-content">
+          <h3 class="branch-title">Sarai Al Atiqa</h3>
+          <span class="branch-phone">📞 81 165 130</span>
+
+          <div class="info-row">
+            <div class="section-label">Opening Hours</div>
+            <div class="hours-list">
+              <div class="hours-row"><span>Mon-Thu, Sat</span> <span>09:00 - 17:30</span></div>
+              <div class="hours-row"><span>Friday</span> <span>09:00 - 17:00</span></div>
+              <div class="hours-row"><span>Sunday</span> <span>09:30 - 15:30</span></div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="section-label">Services</div>
+            <div class="services-tags">
+              <span class="service-tag">In-store Shopping</span>
+              <span class="service-tag">Pick-up</span>
+              <span class="service-tag">Delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 4: Azmi Beik -->
+      <div class="branch-card">
+        <div class="branch-image">
+          <img src="azmi.jpg" alt="Azmi Beik Branch" loading="lazy">
+          <div class="delivery-badge">Delivery Available</div>
+        </div>
+        <div class="branch-content">
+          <h3 class="branch-title">Azmi Beik</h3>
+          <span class="branch-phone">📞 81 165 130</span>
+
+          <div class="info-row">
+            <div class="section-label">Opening Hours</div>
+            <div class="hours-list">
+              <div class="hours-row"><span>Mon-Sat</span> <span>09:30 - 18:00</span></div>
+              <div class="hours-row"><span>Sunday</span> <span>10:00 - 15:00</span></div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="section-label">Services</div>
+            <div class="services-tags">
+              <span class="service-tag">In-store Shopping</span>
+              <span class="service-tag">Quick Pick-up</span>
+              <span class="service-tag">Delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 5: Rachid Karami -->
+      <div class="branch-card">
+        <div class="branch-image">
+          <img src="mina.jpg" alt="Rachid Karami Branch" loading="lazy">
+          <div class="delivery-badge">Delivery Available</div>
+        </div>
+        <div class="branch-content">
+          <h3 class="branch-title">Rachid Karami (Mina)</h3>
+          <span class="branch-phone">📞 81 165 130</span>
+
+          <div class="info-row">
+            <div class="section-label">Opening Hours</div>
+            <div class="hours-list">
+              <div class="hours-row"><span>Mon-Sun</span> <span>10:00 - 21:00</span></div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="section-label">Services</div>
+            <div class="services-tags">
+              <span class="service-tag">In-store Shopping</span>
+              <span class="service-tag">Pick-up</span>
+              <span class="service-tag">Delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Map Section -->
+    <h2 class="section-title">Find Us on Map</h2>
+    <div class="map-wrapper">
       <div id="map"></div>
     </div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-      // Initialize map
-      const map = L.map("map").setView([34.436, 35.832], 13); // Adjust coordinates if needed
+  </div>
 
-      // Add OpenStreetMap tiles
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+  <footer>
+    <div class="container">
+      <div class="logo-container" style="margin-bottom: 0;">
+        <h3 style="font-family: 'Outfit'; font-size: 1.5rem;">Roma Shoes</h3>
+      </div>
+      <p>© 2024 Roma Shoes Lebanon. All rights reserved.</p>
+    </div>
+  </footer>
 
-      // Branch locations
-      const branches = [
-        {
-          name: "Roma-Shoes <br /> Sarai Al Atiqa",
-          phone: "81 165 130",
-          coords: [34.4369485, 35.833087],
-        },
-        {
-          name: "Roma-Shoes <br /> Abi Samra Outlet",
-          phone: "81 165 130",
-          coords: [34.4210005, 35.8435283],
-        },
-        {
-          name: "Roma-Shoes <br /> Abi Samra",
-          phone: "81 165 130",
-          coords: [34.420877, 35.84364],
-        },
-        {
-          name: "Roma-Shoes <br /> Rachid Karami",
-          phone: "81 165 130",
-          coords: [34.4501842, 35.8122036],
-        },
-        {
-          name: "Roma-Shoes <br /> Azmi Beik",
-          phone: "81 165 130",
-          coords: [34.440141, 35.835792],
-        },
-      ];
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize map
+    const map = L.map("map").setView([34.436, 35.832], 13);
 
-      // Add markers
-      branches.forEach((branch) => {
-        L.marker(branch.coords)
-          .addTo(map)
-          .bindPopup(`<strong>${branch.name}</strong><br>📞 ${branch.phone}`);
-      });
-    </script>
-  </body>
+    // Add OpenStreetMap tiles
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // Branch locations
+    const branches = [
+      {
+        name: "Roma-Shoes <br /> Sarai Al Atiqa",
+        phone: "81 165 130",
+        coords: [34.4369485, 35.833087],
+      },
+      {
+        name: "Roma-Shoes <br /> Abi Samra Outlet",
+        phone: "81 165 130",
+        coords: [34.4210005, 35.8435283],
+      },
+      {
+        name: "Roma-Shoes <br /> Abi Samra",
+        phone: "81 165 130",
+        coords: [34.420877, 35.84364],
+      },
+      {
+        name: "Roma-Shoes <br /> Rachid Karami",
+        phone: "81 165 130",
+        coords: [34.4501842, 35.8122036],
+      },
+      {
+        name: "Roma-Shoes <br /> Azmi Beik",
+        phone: "81 165 130",
+        coords: [34.440141, 35.835792],
+      },
+    ];
+
+    // Add markers
+    branches.forEach((branch) => {
+      L.marker(branch.coords)
+        .addTo(map)
+        .bindPopup(`<strong>${branch.name}</strong><br>📞 ${branch.phone}`);
+    });
+  </script>
+</body>
+
 </html>
